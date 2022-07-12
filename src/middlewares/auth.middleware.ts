@@ -37,8 +37,9 @@ async function signInValidations(
   const result = await repository.findByEmail(email);
 
   emailsIsRegistered(email);
-  validPassword(result?.password, password);
+  validPassword(password, result?.password);
 
+  res.locals.user = result;
   return next();
 }
 
@@ -68,7 +69,7 @@ function emailsIsRegistered(email: string) {
   return AppLog('Middleware', 'Email is registered');
 }
 
-function validPassword(providedPassword: string = '', password: string) {
+function validPassword(providedPassword: string, password: string = '') {
   const isValid = service.decryptPassword(providedPassword, password);
 
   if (!isValid) {
