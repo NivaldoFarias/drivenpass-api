@@ -5,7 +5,17 @@ import { env } from '../utils/constants.util';
 import AppLog from '../events/AppLog';
 
 function hashPassword(password: string) {
-  return bcrypt.hashSync(password, env.SALT_ROUNDS);
+  const encrypted = bcrypt.hashSync(password, env.SALT_ROUNDS);
+
+  AppLog('Service', 'Password encrypted');
+  return encrypted;
+}
+
+function decryptPassword(password: string, encrypted: string) {
+  const isValid = bcrypt.compareSync(password, encrypted);
+
+  AppLog('Service', 'Password decrypted');
+  return isValid;
 }
 
 function generateToken(id: number) {
@@ -21,4 +31,4 @@ function generateToken(id: number) {
   return token;
 }
 
-export { hashPassword, generateToken };
+export { hashPassword, generateToken, decryptPassword };
