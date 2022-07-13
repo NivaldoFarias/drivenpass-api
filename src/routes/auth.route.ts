@@ -2,10 +2,9 @@ import { Router } from 'express';
 
 import * as controller from '../controllers/auth.controller';
 import * as middleware from '../middlewares/auth.middleware';
+import * as schema from '../models/auth.model';
 
 import validateSchema from '../middlewares/schema.middleware';
-import registerSchema from '../models/register.model';
-import signInSchema from '../models/signIn.model';
 
 const authRouter = Router();
 const endpoint = '/auth';
@@ -13,7 +12,7 @@ const endpoint = '/auth';
 const registerEndpoint = '/register';
 authRouter.post(
   registerEndpoint,
-  validateSchema(registerSchema, endpoint + registerEndpoint),
+  validateSchema(schema.register, endpoint + registerEndpoint),
   middleware.registerValidations,
   controller.register,
 );
@@ -21,7 +20,7 @@ authRouter.post(
 const signInEndpoint = '/sign-in';
 authRouter.use(
   signInEndpoint,
-  validateSchema(signInSchema, endpoint + signInEndpoint),
+  validateSchema(schema.signIn, endpoint + signInEndpoint),
   middleware.signInValidations,
   controller.signIn,
 );

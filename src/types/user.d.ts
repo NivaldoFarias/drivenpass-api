@@ -1,11 +1,5 @@
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-  createdAt: string;
-}
+import { users } from '@prisma/client';
 
-type UserRegister = Omit<User, 'id' | 'createdAt'>;
+type RegisterUser = Omit<users, 'id' | 'created_at'>;
 
-export { User, UserRegister };
+export { RegisterUser };

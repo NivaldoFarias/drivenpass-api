@@ -4,19 +4,18 @@ import * as repository from '../repositories/auth.repository';
 import * as service from '../services/auth.service';
 
 import { users } from '@prisma/client';
-import { UserRegister } from '../types/user';
+import { RegisterUser } from '../types/user';
 
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
 
 // Middlewares
-
 async function registerValidations(
   _req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const body: UserRegister = res.locals.body;
+  const body: RegisterUser = res.locals.body;
   const { email } = body;
 
   const result = await repository.findByEmail(email);
@@ -31,7 +30,7 @@ async function signInValidations(
   res: Response,
   next: NextFunction,
 ) {
-  const body: UserRegister = res.locals.body;
+  const body: RegisterUser = res.locals.body;
   const { email, password } = body;
 
   const result = await repository.findByEmail(email);
@@ -44,7 +43,6 @@ async function signInValidations(
 }
 
 // Validations
-
 function emailIsUnique(result: users | null) {
   if (result) {
     throw new AppError(

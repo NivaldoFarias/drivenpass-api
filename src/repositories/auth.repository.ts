@@ -1,9 +1,9 @@
-import { UserRegister } from '../types/user';
+import { RegisterUser } from '../types/user';
 import AppLog from '../events/AppLog';
 
 import client from '../config/database';
 
-async function register(registerData: UserRegister) {
+async function register(registerData: RegisterUser) {
   await client.users.create({
     data: registerData,
   });

@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Algorithm, SignOptions } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import { env } from '../utils/constants.util';
@@ -19,11 +19,13 @@ function decryptPassword(password: string, encrypted: string) {
 }
 
 function generateToken(id: number) {
-  const data = {};
+  const data = { id };
   const subject = id.toString();
   const secretKey = env.JWT_SECRET;
   const expiresIn = env.JWT_EXPIRES_IN;
-  const config = { expiresIn, subject };
+
+  const algorithm = env.JWT_ALGORITHM as Algorithm;
+  const config: SignOptions = { algorithm, expiresIn, subject };
 
   const token = jwt.sign(data, secretKey, config);
 
