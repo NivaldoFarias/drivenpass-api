@@ -46,9 +46,9 @@ async function signInValidations(
 function emailIsUnique(result: users | null) {
   if (result) {
     throw new AppError(
-      'Email already exists',
+      'Email already registered',
       409,
-      'Email already exists',
+      'Email already registered',
       'Ensure to provide an email address that is not already in use',
     );
   }

@@ -5,6 +5,7 @@ const create = Joi.object({
   username: Joi.string().pattern(regex.USERNAME).required(),
   url: Joi.string().uri().required(),
   password: Joi.string().min(8).required(),
+  label: Joi.string().min(3).required(),
 });
 
 export { create };

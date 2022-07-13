@@ -4,7 +4,7 @@ import {
   passwords,
   credentials,
   credit_cards,
-  wifi_networks,
+  networks,
 } from '@prisma/client';
 
 type Tables =
@@ -13,7 +13,7 @@ type Tables =
   | 'passwords'
   | 'credentials'
   | 'credit_cards'
-  | 'wifi_networks';
+  | 'networks';
 
 type TablesModels =
   | users
@@ -21,6 +21,6 @@ type TablesModels =
   | passwords
   | credentials
   | credit_cards
-  | wifi_networks;
+  | networks;
 
 export { Tables, TablesModels };

@@ -20,10 +20,10 @@ model users {
   password   String
   created_at DateTime @default(now())
 
-  credentials   credentials[]
-  notes         notes[]
-  credit_cards  credit_cards[]
-  wifi_networks wifi_networks[]
+  credentials  credentials[]
+  notes        notes[]
+  credit_cards credit_cards[]
+  networks     networks[]
 }
 
 model notes {
@@ -41,9 +41,9 @@ model passwords {
   key        String
   created_at DateTime @default(now())
 
-  credentials   credentials[]
-  credit_cards  credit_cards[]
-  wifi_networks wifi_networks[]
+  credentials  credentials[]
+  credit_cards credit_cards[]
+  networks     networks[]
 }
 
 model credentials {
@@ -74,7 +74,7 @@ model credit_cards {
   password passwords @relation(fields: [password_id], references: [id])
 }
 
-model wifi_networks {
+model networks {
   id          Int      @id @default(autoincrement())
   label       String
   name        String

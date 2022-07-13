@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
 
-function processHeader(header: string, endpoint: string) {
+function processHeader(header: string) {
   return (req: Request, res: Response, next: NextFunction) => {
     const data = req.header(header);
 
@@ -16,7 +16,7 @@ function processHeader(header: string, endpoint: string) {
       );
     }
 
-    AppLog('Middleware', `Header for endpoint ${endpoint} processed`);
+    AppLog('Middleware', `Header processed`);
     res.locals.header = data;
     return next();
   };
