@@ -130,8 +130,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# TypeScript 
-/.ts
-
 # Prisma
-/prisma/migrations
+prisma/migrations
+
+# Wakatime
+.wakatime**
+
+# Template files
+**.template.**

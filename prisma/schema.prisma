@@ -14,25 +14,68 @@ model users {
   password   String
   created_at DateTime @default(now())
 
-  categories categories[]
+  credentials   credentials[]
+  notes         notes[]
+  credit_cards  credit_cards[]
+  wifi_networks wifi_networks[]
 }
 
-model categories {
-  id         Int      @id @default(autoincrement())
-  title      String   @unique
-  property   String
-  user_id    Int
-  created_at DateTime @default(now())
+model credentials {
+  id          Int      @id @default(autoincrement())
+  label       String   @unique
+  url         String
+  user_id     Int
+  password_id Int
+  created_at  DateTime @default(now())
 
-  passwords passwords[]
-  user      users       @relation(fields: [user_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
+  password passwords @relation(fields: [password_id], references: [id])
 }
 
 model passwords {
+  id         Int      @id @default(autoincrement())
+  key        String
+  created_at DateTime @default(now())
+
+  credentials   credentials[]
+  credit_cards  credit_cards[]
+  wifi_networks wifi_networks[]
+}
+
+model notes {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  user_id    Int
+  created_at DateTime @default(now())
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
+model credit_cards {
   id          Int      @id @default(autoincrement())
-  key         String
-  category_id Int
+  label       String   @unique
+  number      String   @db.VarChar(16)
+  exp_date    String   @db.VarChar(5)
+  cvc         String   @db.VarChar(3)
+  is_virtual  Boolean
+  type        String
+  user_id     Int
+  password_id Int
   created_at  DateTime @default(now())
 
-  category categories @relation(fields: [category_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
+  password passwords @relation(fields: [password_id], references: [id])
+}
+
+model wifi_networks {
+  id          Int      @id @default(autoincrement())
+  label       String   @unique
+  name        String
+  user_id     Int
+  password_id Int
+  created_at  DateTime @default(now())
+
+  user     users     @relation(fields: [user_id], references: [id])
+  password passwords @relation(fields: [password_id], references: [id])
 }
