@@ -10,20 +10,22 @@ async function create(data: Prisma.credentialsCreateInput) {
   return AppLog('Repository', 'Credential instance inserted');
 }
 
+async function findAll(owner_id: number) {
+  AppLog('Repository', 'Credential searched');
+
+  const data = await client.credentials.findMany({
+    where: { user_id: owner_id },
+  });
+
+  return service.processCredentials(data);
+}
+
 async function findById(id: number) {
   AppLog('Repository', 'Credential searched by id');
 
   return await client.credentials.findFirst({
     where: { id },
   });
-}
-
-async function findAll() {
-  AppLog('Repository', 'Credential searched');
-
-  const data = await client.credentials.findMany();
-
-  return service.processCredentials(data);
 }
 
 async function findUserByLabel(label: string, user_id: number) {

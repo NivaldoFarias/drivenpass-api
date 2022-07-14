@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { credentials } from '@prisma/client';
 
-import * as service from '../services/credential.service';
 import * as repository from '../repositories/credential.repository';
+import * as service from '../services/credential.service';
 
 import AppLog from '../events/AppLog';
 
@@ -19,12 +19,11 @@ async function create(_req: Request, res: Response) {
 
 async function getAll(_req: Request, res: Response) {
   const user_id = Number(res.locals.subject);
-  const data = await repository.findAll();
 
-  const output: credentials[] = service.removePrivateCredentials(data, user_id);
+  const data: credentials[] = await repository.findAll(user_id);
 
   AppLog('Controller', 'Credentials retrieved');
-  return res.send(output);
+  return res.send(data);
 }
 
 function getById(_req: Request, res: Response) {

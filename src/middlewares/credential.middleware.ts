@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { credentials } from '@prisma/client';
 
 import * as repository from './../repositories/credential.repository';
+import * as validate from './../middlewares/global.middleware';
 import * as service from './../services/credential.service';
 
 import urlExist from '../utils/url.util';
@@ -30,13 +31,14 @@ async function getByIdValidations(
   next: NextFunction,
 ) {
   const id = Number(req.params.id);
-  validateParameters(id);
+  const subject = Number(res.locals.subject);
+  validate.validateParameters(id);
 
   const result = await repository.findById(id);
-  validateCredential(result);
-  credentialBelongsToUser(result as credentials, id);
+  validate.entityExists(result, 'Credential');
+  validate.belongsToUser(result, subject, 'Credential');
 
-  const credential = service.processCredentialObject(result);
+  const credential = service.processObject(result);
 
   res.locals.credential = credential;
   return next();
@@ -48,11 +50,12 @@ async function deleteValidations(
   next: NextFunction,
 ) {
   const id = Number(req.params.id);
-  validateParameters(id);
+  const subject = Number(res.locals.subject);
+  validate.validateParameters(id);
 
   const result = await repository.findById(id);
-  validateCredential(result);
-  credentialBelongsToUser(result as credentials, id);
+  validate.entityExists(result, 'Credential');
+  validate.belongsToUser(result, subject, 'Credential');
 
   res.locals.id = id;
   return next();
@@ -92,43 +95,4 @@ async function validateLabel(label: string, user_id: number) {
   }
 
   return AppLog('Middleware', 'Valid Label');
-}
-
-function validateParameters(id: number) {
-  if (!id || isNaN(id)) {
-    throw new AppError(
-      'Invalid parameters',
-      400,
-      'Invalid parameters',
-      'Ensure to provide the required parameters',
-    );
-  }
-
-  AppLog('Middleware', 'Valid ID');
-}
-
-function validateCredential(credential: credentials | null) {
-  if (!credential) {
-    throw new AppError(
-      'Credential not found',
-      404,
-      'Credential not found',
-      'Ensure to provide a valid ID',
-    );
-  }
-
-  AppLog('Middleware', 'Valid Credential');
-}
-
-function credentialBelongsToUser(credential: credentials, user_id: number) {
-  if (credential.user_id !== user_id) {
-    throw new AppError(
-      'Credential owner id mismatch',
-      409,
-      'Credential owner id mismatch',
-      'The provided credential does not belong to the user',
-    );
-  }
-
-  AppLog('Middleware', 'Valid Credential');
 }
