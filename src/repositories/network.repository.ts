@@ -41,4 +41,8 @@ async function deleteOne(id: number) {
   return AppLog('Repository', 'Network instance deleted');
 }
 
-export { create, findUserByLabel, findAll, findById, deleteOne };
+async function count() {
+  return await client.networks.count();
+}
+
+export { create, findUserByLabel, findAll, findById, deleteOne, count };

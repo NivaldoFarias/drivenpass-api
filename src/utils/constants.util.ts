@@ -15,9 +15,15 @@ const regex = {
 };
 
 const time = {
-  CURRRENT_DATE: new Date().toISOString().slice(0, 19).replace('T', ' '),
-  CURRENT_YEAR: new Date().getFullYear().toString().slice(2),
-  CURRENT_MONTH: new Date().getMonth().toString(),
+  CURRENT_MONTH: Number(new Date().getMonth().toString()) + 1,
+  CURRENT_YEAR: Number(new Date().getFullYear().toString().slice(2)),
+  CURRRENT_DATE: Number(
+    new Date().toISOString().slice(0, 19).replace('T', ' '),
+  ),
 };
 
-export { env, regex, time };
+const database = {
+  INT4_MAX: 2147483647,
+};
+
+export { env, regex, time, database };

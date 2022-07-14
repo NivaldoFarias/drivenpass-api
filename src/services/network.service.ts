@@ -21,12 +21,6 @@ function processNetworks(data: any) {
   return output;
 }
 
-function removePrivateData(data: any[], owner_id: number) {
-  return data.filter((note: any) => {
-    return note.user_id === owner_id;
-  });
-}
-
 function processObject(network: any) {
   return {
     ...network,
@@ -34,4 +28,4 @@ function processObject(network: any) {
   };
 }
 
-export { processData, removePrivateData, processObject, processNetworks };
+export { processData, processObject, processNetworks };

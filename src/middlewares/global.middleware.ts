@@ -8,6 +8,7 @@ import processHeader from './header.middleware';
 import requireToken from './token.middleware';
 import { TablesModels } from '../types/tables';
 import AppError from '../config/error';
+import { database } from '../utils/constants.util';
 
 function useMiddleware(middlewares: UseMiddleware, endpoint: string) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +36,7 @@ function useMiddleware(middlewares: UseMiddleware, endpoint: string) {
 }
 
 function validateParameters(id: number) {
-  if (!id || isNaN(id)) {
+  if (!id || isNaN(id) || id > database.INT4_MAX) {
     throw new AppError(
       'Invalid parameters',
       400,
@@ -65,7 +66,6 @@ function belongsToUser(
   owner_id: number,
   table_name: string,
 ) {
-  console.log(entity.user_id, owner_id);
   if (entity.user_id !== owner_id) {
     throw new AppError(
       `${table_name} owner id mismatch`,

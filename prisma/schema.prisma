@@ -47,8 +47,9 @@ model credit_cards {
   label      String
   number     String          @db.VarChar(16)
   exp_date   String          @db.VarChar(5)
-  cvc        String          @db.VarChar(3)
-  password   String          @db.VarChar(4)
+  cvc        String
+  password   String
+  owner      String
   is_virtual Boolean
   user_id    Int
   created_at DateTime        @default(now())

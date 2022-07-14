@@ -28,6 +28,7 @@ async function getByIdValidations(
 ) {
   const id = Number(req.params.id);
   const subject = Number(res.locals.subject);
+
   validate.validateParameters(id);
 
   const result = await repository.findById(id);
@@ -47,6 +48,7 @@ async function deleteValidations(
 ) {
   const id = Number(req.params.id);
   const subject = Number(res.locals.subject);
+
   validate.validateParameters(id);
 
   const network = await repository.findById(id);

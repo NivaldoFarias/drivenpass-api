@@ -41,4 +41,8 @@ async function deleteOne(id: number) {
   return AppLog('Repository', 'Credential instance deleted');
 }
 
-export { create, findById, findAll, findUserByLabel, deleteOne };
+async function count() {
+  return await client.credentials.count();
+}
+
+export { create, findById, findAll, findUserByLabel, deleteOne, count };

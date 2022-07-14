@@ -28,15 +28,4 @@ function processObject(credential: any) {
   };
 }
 
-function removePrivateCredentials(data: any[], owner_id: number) {
-  return data.filter((credential: any) => {
-    return credential.user_id === owner_id;
-  });
-}
-
-export {
-  processData,
-  processCredentials,
-  processObject,
-  removePrivateCredentials,
-};
+export { processData, processCredentials, processObject };

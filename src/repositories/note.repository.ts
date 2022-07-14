@@ -37,4 +37,8 @@ async function deleteOne(id: number) {
   return AppLog('Repository', 'Note instance deleted');
 }
 
-export { create, findUserByLabel, findAll, findById, deleteOne };
+async function count() {
+  return await client.notes.count();
+}
+
+export { create, findUserByLabel, findAll, findById, deleteOne, count };
