@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import { credentials } from '@prisma/client';
 
 import * as service from '../services/credential.service';
 import * as repository from '../repositories/credential.repository';
 
 import AppLog from '../events/AppLog';
-import { credentials } from '@prisma/client';
 
 async function create(_req: Request, res: Response) {
   const body = res.locals.body;

@@ -19,7 +19,7 @@ function decryptPassword(password: string, encrypted: string) {
 }
 
 function generateToken(id: number) {
-  const data = { id };
+  const data = {};
   const subject = id.toString();
   const secretKey = env.JWT_SECRET;
   const expiresIn = env.JWT_EXPIRES_IN;

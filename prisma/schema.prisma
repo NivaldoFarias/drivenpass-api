@@ -21,67 +21,51 @@ model users {
 }
 
 model notes {
-  id          Int      @id @default(autoincrement())
-  content     String
-  user_id     Int
-  password_id Int
-  created_at  DateTime @default(now())
-  label       String
-
-  password passwords @relation(fields: [password_id], references: [id])
-  user     users     @relation(fields: [user_id], references: [id])
-}
-
-model passwords {
   id         Int      @id @default(autoincrement())
-  key        String
+  label      String
+  content    String
+  user_id    Int
   created_at DateTime @default(now())
 
-  credentials  credentials[]
-  credit_cards credit_cards[]
-  networks     networks[]
-  notes        notes[]
+  user users @relation(fields: [user_id], references: [id])
 }
 
 model credentials {
-  id          Int      @id @default(autoincrement())
-  url         String
-  user_id     Int
-  password_id Int
-  created_at  DateTime @default(now())
-  label       String
-  username    String
+  id         Int      @id @default(autoincrement())
+  url        String
+  label      String
+  username   String
+  password   String
+  user_id    Int
+  created_at DateTime @default(now())
 
-  password passwords @relation(fields: [password_id], references: [id])
-  user     users     @relation(fields: [user_id], references: [id])
+  user users @relation(fields: [user_id], references: [id])
 }
 
 model credit_cards {
-  id          Int             @id @default(autoincrement())
-  label       String
-  number      String          @db.VarChar(16)
-  exp_date    String          @db.VarChar(5)
-  cvc         String          @db.VarChar(3)
-  is_virtual  Boolean
-  user_id     Int
-  password_id Int
-  created_at  DateTime        @default(now())
-  type        enum_card_types
+  id         Int             @id @default(autoincrement())
+  label      String
+  number     String          @db.VarChar(16)
+  exp_date   String          @db.VarChar(5)
+  cvc        String          @db.VarChar(3)
+  password   String          @db.VarChar(4)
+  is_virtual Boolean
+  user_id    Int
+  created_at DateTime        @default(now())
+  type       enum_card_types
 
-  password passwords @relation(fields: [password_id], references: [id])
-  user     users     @relation(fields: [user_id], references: [id])
+  user users @relation(fields: [user_id], references: [id])
 }
 
 model networks {
-  id          Int      @id @default(autoincrement())
-  label       String
-  name        String
-  user_id     Int
-  password_id Int
-  created_at  DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  label      String
+  name       String
+  password   String
+  user_id    Int
+  created_at DateTime @default(now())
 
-  password passwords @relation(fields: [password_id], references: [id])
-  user     users     @relation(fields: [user_id], references: [id])
+  user users @relation(fields: [user_id], references: [id])
 }
 
 enum enum_card_types {

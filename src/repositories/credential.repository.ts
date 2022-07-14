@@ -15,16 +15,13 @@ async function findById(id: number) {
 
   return await client.credentials.findFirst({
     where: { id },
-    include: { password: true },
   });
 }
 
 async function findAll() {
   AppLog('Repository', 'Credential searched');
 
-  const data = await client.credentials.findMany({
-    include: { password: true },
-  });
+  const data = await client.credentials.findMany();
 
   return service.processCredentials(data);
 }
@@ -32,11 +29,9 @@ async function findAll() {
 async function findUserByLabel(label: string, user_id: number) {
   AppLog('Repository', 'Credential searched by label');
 
-  return (await client.credentials.findFirst({
+  return !!(await client.credentials.findFirst({
     where: { label, user_id },
-  }))
-    ? true
-    : false;
+  }));
 }
 
 async function deleteOne(id: number) {

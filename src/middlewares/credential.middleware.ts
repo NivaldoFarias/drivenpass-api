@@ -50,8 +50,9 @@ async function deleteValidations(
   const id = Number(req.params.id);
   validateParameters(id);
 
-  const credential = await repository.findById(id);
-  validateCredential(credential);
+  const result = await repository.findById(id);
+  validateCredential(result);
+  credentialBelongsToUser(result as credentials, id);
 
   res.locals.id = id;
   return next();
