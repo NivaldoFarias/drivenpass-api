@@ -17,7 +17,14 @@ credentialRouter.post(
     endpoint + createEndpoint,
   ),
   middleware.createValidations,
-  controller.createCredential,
+  controller.create,
+);
+
+const getAllEndpoint = '/all';
+credentialRouter.get(
+  getAllEndpoint,
+  useMiddleware({ token: true }, endpoint + getAllEndpoint),
+  controller.getAll,
 );
 
 export default credentialRouter;

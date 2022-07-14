@@ -5,7 +5,7 @@ import * as repository from '../repositories/credential.repository';
 
 import AppLog from '../events/AppLog';
 
-async function createCredential(_req: Request, res: Response) {
+async function create(_req: Request, res: Response) {
   const body = res.locals.body;
   const subject = Number(res.locals.subject);
 
@@ -16,4 +16,11 @@ async function createCredential(_req: Request, res: Response) {
   return res.sendStatus(201);
 }
 
-export { createCredential };
+async function getAll(_req: Request, res: Response) {
+  const data = await repository.findAll();
+
+  AppLog('Controller', 'Credentials retrieved');
+  return res.send(data);
+}
+
+export { create, getAll };
