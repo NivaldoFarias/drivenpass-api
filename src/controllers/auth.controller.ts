@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
+import { Prisma } from '@prisma/client';
 import './../config/setup';
 
-import { RegisterUser } from '../types/user';
 import AppLog from '../events/AppLog';
 
 import * as repository from './../repositories/auth.repository';
 import * as service from './../services/auth.service';
 
 async function register(_req: Request, res: Response) {
-  const body: RegisterUser = res.locals.body;
+  const body: Prisma.usersCreateInput = res.locals.body;
   const password = service.hashPassword(body.password);
 
   const data = {

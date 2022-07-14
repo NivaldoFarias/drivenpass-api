@@ -49,6 +49,7 @@ model passwords {
 model credentials {
   id          Int      @id @default(autoincrement())
   label       String
+  username    String
   url         String
   user_id     Int
   password_id Int

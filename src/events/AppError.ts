@@ -11,7 +11,7 @@ function ExceptionHandler(
 ) {
   const { log, statusCode, message, details } = error;
 
-  AppLog('Error', log);
+  AppLog('Error', log ?? message);
   return error instanceof AppError
     ? res.status(statusCode).send({ message, details })
     : res.status(500).send({

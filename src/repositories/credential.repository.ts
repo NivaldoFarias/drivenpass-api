@@ -1,13 +1,11 @@
-import { CreateCredential } from '../types/credential';
+import { Prisma } from '@prisma/client';
 
 import client from '../config/database';
 import AppLog from '../events/AppLog';
 
-async function create(createData: CreateCredential) {
-  await client.credentials.create({
-    data: createData,
-  });
-  return AppLog('Repository', 'Credential instance created');
+async function create(data: Prisma.credentialsCreateInput) {
+  await client.credentials.create({ data });
+  return AppLog('Repository', 'Credential instance inserted');
 }
 
 async function findById(id: number) {

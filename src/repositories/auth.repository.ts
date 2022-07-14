@@ -1,13 +1,13 @@
-import { RegisterUser } from '../types/user';
-import AppLog from '../events/AppLog';
+import { Prisma } from '@prisma/client';
 
 import client from '../config/database';
+import AppLog from '../events/AppLog';
 
-async function register(registerData: RegisterUser) {
+async function register(data: Prisma.usersCreateInput) {
   await client.users.create({
-    data: registerData,
+    data,
   });
-  return AppLog('Repository', 'User instance created');
+  return AppLog('Repository', 'User instance inserted');
 }
 
 async function findByEmail(email: string) {

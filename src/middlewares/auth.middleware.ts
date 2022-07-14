@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import { Prisma, users } from '@prisma/client';
 
 import * as repository from '../repositories/auth.repository';
 import * as service from '../services/auth.service';
-
-import { users } from '@prisma/client';
-import { RegisterUser } from '../types/user';
 
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
@@ -15,7 +13,7 @@ async function registerValidations(
   res: Response,
   next: NextFunction,
 ) {
-  const body: RegisterUser = res.locals.body;
+  const body: Prisma.usersCreateInput = res.locals.body;
   const { email } = body;
 
   const result = await repository.findByEmail(email);
@@ -30,7 +28,7 @@ async function signInValidations(
   res: Response,
   next: NextFunction,
 ) {
-  const body: RegisterUser = res.locals.body;
+  const body: Prisma.usersCreateInput = res.locals.body;
   const { email, password } = body;
 
   const result = await repository.findByEmail(email);

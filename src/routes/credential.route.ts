@@ -13,7 +13,7 @@ const createEndpoint = '/create';
 credentialRouter.post(
   createEndpoint,
   validateSchema(schema.create, endpoint + createEndpoint),
-  middleware.createCredentialValidations,
+  middleware.createValidations,
   controller.createCredential,
 );
 

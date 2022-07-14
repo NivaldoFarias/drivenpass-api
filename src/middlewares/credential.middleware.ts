@@ -1,22 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
+import { Prisma } from '@prisma/client';
+import urlExist from 'url-exist';
 
-import { CredentialReqBody } from '../types/credential';
+import AppError from '../config/error';
+import AppLog from '../events/AppLog';
 
 import * as queries from '../utils/queries.util';
-import AppLog from '../events/AppLog';
-import urlExist from 'url-exist';
-import AppError from '../config/error';
 
-async function createCredentialValidations(
+async function createValidations(
   _req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const { username, password, url, label }: CredentialReqBody = res.locals.body;
+  const { username, password, url, label }: Prisma.credentialsCreateInput =
+    res.locals.body;
   const subject = Number(res.locals.subject);
   1;
 
-  validateUrl(url);
+  await validateUrl(url);
   validateLabel(label);
 
   const user = await queries.findUserById(subject);
@@ -25,8 +26,10 @@ async function createCredentialValidations(
   return next();
 }
 
-function validateUrl(url: string) {
-  if (!urlExist(url)) {
+async function validateUrl(url: string) {
+  const validUrl = await urlExist(url);
+
+  if (!validUrl) {
     throw new AppError(
       'URL does not exist',
       400,
@@ -51,4 +54,4 @@ function validateLabel(label: string) {
   return AppLog('Middleware', 'Valid Label');
 }
 
-export { createCredentialValidations };
+export { createValidations };
