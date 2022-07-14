@@ -3,8 +3,10 @@ import Cryptr from 'cryptr';
 import * as queries from './../utils/queries.util';
 import { env } from './../utils/constants.util';
 
+const CRYPTR = new Cryptr(env.CRYPTR_SECRET);
+
 async function processData(data: any, user_id: number) {
-  const encrypted = encrypt(data.password);
+  const encrypted = CRYPTR.encrypt(data.password);
   const { id: password_id } = await queries.createPassword({ key: encrypted });
 
   const output = {
@@ -17,10 +19,15 @@ async function processData(data: any, user_id: number) {
   return output;
 }
 
-//Local utils
-function encrypt(password: string) {
-  const cryptr = new Cryptr(env.CRYPTR_SECRET);
-  return cryptr.encrypt(password);
+function processCredentials(data: any) {
+  const output = data.map((credential: any) => {
+    delete credential.password_id;
+    delete credential.user_id;
+    credential.password = CRYPTR.decrypt(credential.password.key);
+
+    return credential;
+  });
+  return output;
 }
 
-export { encrypt, processData };
+export { processData, processCredentials };
