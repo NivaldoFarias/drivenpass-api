@@ -1,4 +1,3 @@
-import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import { env } from '../utils/constants.util';
@@ -6,19 +5,19 @@ import { env } from '../utils/constants.util';
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
 
-async function requireToken(_req: Request, res: Response, next: NextFunction) {
-  const authorization: string = res.locals.header;
+async function requireToken(authorization: string) {
   const token = parseToken(authorization);
+  let subject = null;
 
   try {
     const { sub } = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
-    res.locals.subject = sub;
+    subject = sub;
   } catch (error: any) {
     throw new AppError(`Invalid token`, 403, `Invalid token`, error);
   }
 
   AppLog('Middleware', 'Valid token');
-  return next();
+  return subject;
 }
 
 function parseToken(header: string) {

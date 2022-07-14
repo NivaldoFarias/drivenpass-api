@@ -22,4 +22,14 @@ async function findAll() {
   return await client.credentials.findMany();
 }
 
-export { create, findById, findAll };
+async function findUserByLabel(label: string, user_id: number) {
+  AppLog('Repository', 'Credential searched by label');
+
+  return (await client.credentials.findFirst({
+    where: { label, user_id },
+  }))
+    ? true
+    : false;
+}
+
+export { create, findById, findAll, findUserByLabel };

@@ -5,6 +5,7 @@ const env = {
   JWT_SECRET: process.env.JWT_SECRET || 'secret',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '1d',
   JWT_ALGORITHM: process.env.JWT_ALGORITHM || 'HS256',
+  CRYPTR_SECRET: process.env.CRYPTR_SECRET || 'secret',
 };
 
 const regex = {

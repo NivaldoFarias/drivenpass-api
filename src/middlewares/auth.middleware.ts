@@ -33,6 +33,7 @@ async function signInValidations(
 
   const result = await repository.findByEmail(email);
 
+  userExists(result);
   emailsIsRegistered(email);
   validPassword(password, result?.password);
 
@@ -41,6 +42,19 @@ async function signInValidations(
 }
 
 // Validations
+function userExists(user: users | null) {
+  if (!user) {
+    throw new AppError(
+      'User not found',
+      404,
+      'User not found',
+      'Ensure to provide a valid email address',
+    );
+  }
+
+  return AppLog('Middleware', 'User exists');
+}
+
 function emailIsUnique(result: users | null) {
   if (result) {
     throw new AppError(

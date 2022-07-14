@@ -13,7 +13,7 @@ async function register(data: Prisma.usersCreateInput) {
 async function findByEmail(email: string) {
   AppLog('Repository', 'User searched by email');
 
-  return await client.users.findFirst({
+  return await client.users.findUnique({
     where: { email },
   });
 }

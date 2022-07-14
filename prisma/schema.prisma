@@ -7,33 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum enum_card_types {
-  CREDIT
-  DEBIT
-  BOTH
-}
-
 model users {
   id         Int      @id @default(autoincrement())
   username   String
-  email      String   @unique
   password   String
   created_at DateTime @default(now())
+  email      String   @unique
 
   credentials  credentials[]
-  notes        notes[]
   credit_cards credit_cards[]
   networks     networks[]
+  notes        notes[]
 }
 
 model notes {
-  id         Int      @id @default(autoincrement())
-  label      String
-  content    String
-  user_id    Int
-  created_at DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  content     String
+  user_id     Int
+  password_id Int
+  created_at  DateTime @default(now())
+  label       String
 
-  user users @relation(fields: [user_id], references: [id])
+  password passwords @relation(fields: [password_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
 }
 
 model passwords {
@@ -44,19 +40,20 @@ model passwords {
   credentials  credentials[]
   credit_cards credit_cards[]
   networks     networks[]
+  notes        notes[]
 }
 
 model credentials {
   id          Int      @id @default(autoincrement())
-  label       String
-  username    String
   url         String
   user_id     Int
   password_id Int
   created_at  DateTime @default(now())
+  label       String
+  username    String
 
-  user     users     @relation(fields: [user_id], references: [id])
   password passwords @relation(fields: [password_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
 }
 
 model credit_cards {
@@ -66,13 +63,13 @@ model credit_cards {
   exp_date    String          @db.VarChar(5)
   cvc         String          @db.VarChar(3)
   is_virtual  Boolean
-  type        enum_card_types
   user_id     Int
   password_id Int
   created_at  DateTime        @default(now())
+  type        enum_card_types
 
-  user     users     @relation(fields: [user_id], references: [id])
   password passwords @relation(fields: [password_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
 }
 
 model networks {
@@ -83,6 +80,12 @@ model networks {
   password_id Int
   created_at  DateTime @default(now())
 
-  user     users     @relation(fields: [user_id], references: [id])
   password passwords @relation(fields: [password_id], references: [id])
+  user     users     @relation(fields: [user_id], references: [id])
+}
+
+enum enum_card_types {
+  CREDIT
+  DEBIT
+  BOTH
 }

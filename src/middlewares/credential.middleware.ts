@@ -1,31 +1,29 @@
 import { Request, Response, NextFunction } from 'express';
 import { Prisma } from '@prisma/client';
-import urlExist from 'url-exist';
+
+import * as repository from './../repositories/credential.repository';
+import urlExist from '../utils/url.util';
 
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
-
-import * as queries from '../utils/queries.util';
 
 async function createValidations(
   _req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const { username, password, url, label }: Prisma.credentialsCreateInput =
-    res.locals.body;
+  const { url, label }: Prisma.credentialsCreateInput = res.locals.body;
   const subject = Number(res.locals.subject);
-  1;
 
-  await validateUrl(url);
-  validateLabel(label);
+  await Promise.all([
+    await validateUrl(url),
+    await validateLabel(label, subject),
+  ]);
 
-  const user = await queries.findUserById(subject);
-
-  console.table(user);
   return next();
 }
 
+// Local Utils
 async function validateUrl(url: string) {
   const validUrl = await urlExist(url);
 
@@ -41,13 +39,18 @@ async function validateUrl(url: string) {
   return AppLog('Middleware', 'Valid Url');
 }
 
-function validateLabel(label: string) {
-  if (label.length < 3) {
+async function validateLabel(label: string, user_id: number) {
+  const usersAlreadyUsedLabel = await repository.findUserByLabel(
+    label,
+    user_id,
+  );
+
+  if (usersAlreadyUsedLabel) {
     throw new AppError(
-      'Label is too short',
-      400,
-      'Label is too short',
-      'Ensure to provide a valid label',
+      'Label already in use',
+      409,
+      'Label already in use',
+      'A Label can only be used once per user',
     );
   }
 
