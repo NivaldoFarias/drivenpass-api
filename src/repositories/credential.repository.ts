@@ -1,11 +1,11 @@
-import { Prisma } from '@prisma/client';
+import { credentials } from '@prisma/client';
 
 import * as service from '../services/credential.service';
 
 import client from '../config/database';
 import AppLog from '../events/AppLog';
 
-async function create(data: Prisma.credentialsCreateInput) {
+async function create(data: credentials) {
   await client.credentials.create({ data });
   return AppLog('Repository', 'Credential instance inserted');
 }

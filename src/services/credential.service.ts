@@ -3,7 +3,7 @@ import { env } from './../utils/constants.util';
 
 const CRYPTR = new Cryptr(env.CRYPTR_SECRET);
 
-async function processData(data: any, user_id: number) {
+function processData(data: any, user_id: number) {
   const encrypted = CRYPTR.encrypt(data.password);
   const output = {
     ...data,
