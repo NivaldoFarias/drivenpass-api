@@ -18,11 +18,15 @@ async function create(_req: Request, res: Response) {
 }
 
 async function getAll(_req: Request, res: Response) {
-  const data: credentials[] = await repository.findAll();
+  const user_id = Number(res.locals.subject);
+  const data = await repository.findAll();
+
+  const output: credentials[] = service.removePrivateCredentials(data, user_id);
 
   AppLog('Controller', 'Credentials retrieved');
-  return res.send(data);
+  return res.send(output);
 }
+
 function getById(_req: Request, res: Response) {
   const credential: credentials = res.locals.credential;
 
@@ -30,4 +34,12 @@ function getById(_req: Request, res: Response) {
   return res.send(credential);
 }
 
-export { create, getAll, getById };
+async function deleteOne(_req: Request, res: Response) {
+  const id = Number(res.locals.id);
+  await repository.deleteOne(id);
+
+  AppLog('Controller', 'Credential deleted');
+  return res.sendStatus(200);
+}
+
+export { create, getAll, getById, deleteOne };

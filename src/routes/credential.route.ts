@@ -35,4 +35,12 @@ credentialRouter.get(
   controller.getById,
 );
 
+const deleteEndpoint = getByIdEndpoint + '/delete';
+credentialRouter.delete(
+  deleteEndpoint,
+  useMiddleware({ token: true }, endpoint + deleteEndpoint),
+  middleware.deleteValidations,
+  controller.deleteOne,
+);
+
 export default credentialRouter;

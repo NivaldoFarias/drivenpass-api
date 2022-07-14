@@ -13,12 +13,10 @@ async function create(data: Prisma.credentialsCreateInput) {
 async function findById(id: number) {
   AppLog('Repository', 'Credential searched by id');
 
-  const data = await client.credentials.findFirst({
+  return await client.credentials.findFirst({
     where: { id },
     include: { password: true },
   });
-
-  return service.processCredentials([data])[0];
 }
 
 async function findAll() {

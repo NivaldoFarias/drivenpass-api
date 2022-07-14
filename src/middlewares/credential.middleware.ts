@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { Prisma, credentials } from '@prisma/client';
 
 import * as repository from './../repositories/credential.repository';
-import urlExist from '../utils/url.util';
+import * as service from './../services/credential.service';
 
+import urlExist from '../utils/url.util';
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
 
@@ -31,14 +32,32 @@ async function getByIdValidations(
   const id = Number(req.params.id);
   validateParameters(id);
 
-  const credential = await repository.findById(id);
-  validateCredential(credential);
+  const result = await repository.findById(id);
+  validateCredential(result);
+  credentialBelongsToUser(result as credentials, id);
+
+  const credential = service.processCredentialObject(result);
 
   res.locals.credential = credential;
   return next();
 }
 
-export { createValidations, getByIdValidations };
+async function deleteValidations(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const id = Number(req.params.id);
+  validateParameters(id);
+
+  const credential = await repository.findById(id);
+  validateCredential(credential);
+
+  res.locals.id = id;
+  return next();
+}
+
+export { createValidations, getByIdValidations, deleteValidations };
 
 // Local Utils
 async function validateUrl(url: string) {
@@ -75,12 +94,12 @@ async function validateLabel(label: string, user_id: number) {
 }
 
 function validateParameters(id: number) {
-  if (!id) {
+  if (!id || isNaN(id)) {
     throw new AppError(
-      'ID is required',
+      'Invalid parameters',
       400,
-      'ID is required',
-      'Ensure to provide a ID',
+      'Invalid parameters',
+      'Ensure to provide the required parameters',
     );
   }
 
@@ -94,6 +113,19 @@ function validateCredential(credential: credentials | null) {
       404,
       'Credential not found',
       'Ensure to provide a valid ID',
+    );
+  }
+
+  AppLog('Middleware', 'Valid Credential');
+}
+
+function credentialBelongsToUser(credential: credentials, user_id: number) {
+  if (credential.user_id !== user_id) {
+    throw new AppError(
+      'Credential owner id mismatch',
+      409,
+      'Credential owner id mismatch',
+      'The provided credential does not belong to the user',
     );
   }
 

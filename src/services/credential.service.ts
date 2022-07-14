@@ -21,13 +21,31 @@ async function processData(data: any, user_id: number) {
 
 function processCredentials(data: any) {
   const output = data.map((credential: any) => {
-    delete credential.password_id;
-    delete credential.user_id;
-    credential.password = CRYPTR.decrypt(credential.password.key);
-
-    return credential;
+    return processCredentialObject(credential);
   });
   return output;
 }
 
-export { processData, processCredentials };
+function processCredentialObject(credential: any) {
+  const output = {
+    ...credential,
+    password: CRYPTR.decrypt(credential.password.key),
+  };
+  delete output.password_id;
+  delete output.user_id;
+
+  return output;
+}
+
+function removePrivateCredentials(data: any[], owner_id: number) {
+  return data.filter((credential: any) => {
+    return credential.user_id === owner_id;
+  });
+}
+
+export {
+  processData,
+  processCredentials,
+  processCredentialObject,
+  removePrivateCredentials,
+};
