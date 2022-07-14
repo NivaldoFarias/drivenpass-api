@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Prisma, credentials } from '@prisma/client';
+import { credentials } from '@prisma/client';
 
 import * as repository from './../repositories/credential.repository';
 import * as service from './../services/credential.service';
@@ -13,7 +13,7 @@ async function createValidations(
   res: Response,
   next: NextFunction,
 ) {
-  const { url, label }: Prisma.credentialsCreateInput = res.locals.body;
+  const { url, label }: credentials = res.locals.body;
   const subject = Number(res.locals.subject);
 
   await Promise.all([

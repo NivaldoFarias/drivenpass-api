@@ -33,7 +33,7 @@ async function signInValidations(
 
   const result = await repository.findByEmail(email);
 
-  userExists(result);
+  validateUser(result);
   emailsIsRegistered(email);
   validPassword(password, result?.password);
 
@@ -42,7 +42,7 @@ async function signInValidations(
 }
 
 // Validations
-function userExists(user: users | null) {
+function validateUser(user: users | null) {
   if (!user) {
     throw new AppError(
       'User not found',

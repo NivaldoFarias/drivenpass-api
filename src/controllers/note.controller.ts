@@ -10,7 +10,7 @@ async function create(_req: Request, res: Response) {
   const body = res.locals.body;
   const subject = Number(res.locals.subject);
 
-  const data = await service.processData(body, subject);
+  const data: notes = service.processData(body, subject);
   await repository.create(data);
 
   AppLog('Controller', 'Note created');
