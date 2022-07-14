@@ -27,4 +27,12 @@ credentialRouter.get(
   controller.getAll,
 );
 
+const getByIdEndpoint = '/:id';
+credentialRouter.get(
+  getByIdEndpoint,
+  useMiddleware({ token: true }, endpoint + getByIdEndpoint),
+  middleware.getByIdValidations,
+  controller.getById,
+);
+
 export default credentialRouter;

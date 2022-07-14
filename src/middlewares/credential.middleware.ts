@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Prisma } from '@prisma/client';
+import { Prisma, credentials } from '@prisma/client';
 
 import * as repository from './../repositories/credential.repository';
 import urlExist from '../utils/url.util';
@@ -22,6 +22,23 @@ async function createValidations(
 
   return next();
 }
+
+async function getByIdValidations(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const id = Number(req.params.id);
+  validateParameters(id);
+
+  const credential = await repository.findById(id);
+  validateCredential(credential);
+
+  res.locals.credential = credential;
+  return next();
+}
+
+export { createValidations, getByIdValidations };
 
 // Local Utils
 async function validateUrl(url: string) {
@@ -57,4 +74,28 @@ async function validateLabel(label: string, user_id: number) {
   return AppLog('Middleware', 'Valid Label');
 }
 
-export { createValidations };
+function validateParameters(id: number) {
+  if (!id) {
+    throw new AppError(
+      'ID is required',
+      400,
+      'ID is required',
+      'Ensure to provide a ID',
+    );
+  }
+
+  AppLog('Middleware', 'Valid ID');
+}
+
+function validateCredential(credential: credentials | null) {
+  if (!credential) {
+    throw new AppError(
+      'Credential not found',
+      404,
+      'Credential not found',
+      'Ensure to provide a valid ID',
+    );
+  }
+
+  AppLog('Middleware', 'Valid Credential');
+}

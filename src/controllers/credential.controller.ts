@@ -4,6 +4,7 @@ import * as service from '../services/credential.service';
 import * as repository from '../repositories/credential.repository';
 
 import AppLog from '../events/AppLog';
+import { credentials } from '@prisma/client';
 
 async function create(_req: Request, res: Response) {
   const body = res.locals.body;
@@ -17,10 +18,16 @@ async function create(_req: Request, res: Response) {
 }
 
 async function getAll(_req: Request, res: Response) {
-  const data = await repository.findAll();
+  const data: credentials[] = await repository.findAll();
 
   AppLog('Controller', 'Credentials retrieved');
   return res.send(data);
 }
+function getById(_req: Request, res: Response) {
+  const credential: credentials = res.locals.credential;
 
-export { create, getAll };
+  AppLog('Controller', 'Credential retrieved');
+  return res.send(credential);
+}
+
+export { create, getAll, getById };
