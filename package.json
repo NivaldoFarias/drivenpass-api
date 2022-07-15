@@ -11,9 +11,8 @@
     "dev": "tsnd --respawn --transpile-only --exit-child src/server.ts",
     "debug": "tsnd --respawn --transpile-only --debug src/server.ts",
     "migrate": "npx prisma migrate dev",
-    "prisma:studio": "npx prisma studio",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku:postbuild": "npx prisma migrate dev && npm run build"
+    "studio": "npx prisma studio",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "typescript",
