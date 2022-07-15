@@ -61,11 +61,7 @@ function entityExists(entity: TablesModels | null, table_name: string) {
   AppLog('Middleware', `${table_name} found`);
 }
 
-function belongsToUser(
-  entity: TablesModels,
-  owner_id: number,
-  table_name: string,
-) {
+function belongsToUser(entity: any, owner_id: number, table_name: string) {
   if (entity.user_id !== owner_id) {
     throw new AppError(
       `${table_name} owner id mismatch`,

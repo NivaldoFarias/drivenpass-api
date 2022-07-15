@@ -36,7 +36,7 @@ async function getByIdValidations(
 
   const document = await repository.findById(id);
   validate.entityExists(document, 'Document');
-  validate.belongsToUser(document, subject, 'Document');
+  validate.belongsToUser(document as documents, subject, 'Document');
 
   res.locals.document = document;
   return next();
@@ -54,7 +54,7 @@ async function deleteValidations(
 
   const document = await repository.findById(id);
   validate.entityExists(document, 'Document');
-  validate.belongsToUser(document, subject, 'Document');
+  validate.belongsToUser(document as documents, subject, 'Document');
 
   res.locals.id = id;
   return next();

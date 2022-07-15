@@ -1,7 +1,7 @@
 import {
   users,
   notes,
-  passwords,
+  documents,
   credentials,
   credit_cards,
   networks,
@@ -10,7 +10,7 @@ import {
 type Tables =
   | 'users'
   | 'notes'
-  | 'passwords'
+  | 'documents'
   | 'credentials'
   | 'credit_cards'
   | 'networks';
@@ -18,7 +18,7 @@ type Tables =
 type TablesModels =
   | users
   | notes
-  | passwords
+  | documents
   | credentials
   | credit_cards
   | networks;

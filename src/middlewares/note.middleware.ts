@@ -32,7 +32,7 @@ async function getByIdValidations(
 
   const note = await repository.findById(id);
   validate.entityExists(note, 'Note');
-  validate.belongsToUser(note, subject, 'Note');
+  validate.belongsToUser(note as notes, subject, 'Note');
 
   res.locals.note = note;
   return next();
@@ -50,7 +50,7 @@ async function deleteValidations(
 
   const note = await repository.findById(id);
   validate.entityExists(note, 'Note');
-  validate.belongsToUser(note, subject, 'Note');
+  validate.belongsToUser(note as notes, subject, 'Note');
 
   res.locals.id = id;
   return next();

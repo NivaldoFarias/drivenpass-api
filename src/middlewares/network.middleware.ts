@@ -33,7 +33,7 @@ async function getByIdValidations(
 
   const result = await repository.findById(id);
   validate.entityExists(result, 'Network');
-  validate.belongsToUser(result, subject, 'Network');
+  validate.belongsToUser(result as networks, subject, 'Network');
 
   const network = service.processObject(result);
 
@@ -53,7 +53,7 @@ async function deleteValidations(
 
   const network = await repository.findById(id);
   validate.entityExists(network, 'Network');
-  validate.belongsToUser(network, subject, 'Network');
+  validate.belongsToUser(network as networks, subject, 'Network');
 
   res.locals.id = id;
   return next();
