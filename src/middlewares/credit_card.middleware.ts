@@ -5,10 +5,10 @@ import * as repository from './../repositories/credit_card.repository';
 import * as service from './../services/credit_card.service';
 import * as validate from './global.middleware';
 
-import { database, time } from '../utils/constants.util';
-
 import AppError from '../config/error';
 import AppLog from '../events/AppLog';
+
+import { time } from '../utils/constants.util';
 
 async function createValidations(
   _req: Request,
@@ -32,7 +32,7 @@ async function getByIdValidations(
   const id = Number(req.params.id);
   const subject = Number(res.locals.subject);
 
-  validate.validateParameters(id, database.INT4_MAX);
+  validate.validateParameters(id);
 
   const result = await repository.findById(id);
   validate.entityExists(result, 'Credit card');
@@ -52,7 +52,7 @@ async function deleteValidations(
   const id = Number(req.params.id);
   const subject = Number(res.locals.subject);
 
-  validate.validateParameters(id, database.INT4_MAX);
+  validate.validateParameters(id);
 
   const result = await repository.findById(id);
   validate.entityExists(result, 'Credit card');

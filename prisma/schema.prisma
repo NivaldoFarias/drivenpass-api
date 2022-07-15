@@ -18,6 +18,7 @@ model users {
   credit_cards credit_cards[]
   networks     networks[]
   notes        notes[]
+  documents    documents[]
 }
 
 model notes {
@@ -69,8 +70,28 @@ model networks {
   user users @relation(fields: [user_id], references: [id])
 }
 
+model documents {
+  id              Int            @id @default(autoincrement())
+  label           String
+  full_name       String
+  emission_date   String         @db.VarChar(10)
+  exp_date        String         @db.VarChar(10)
+  registry_number String
+  issuing_agency  String
+  user_id         Int
+  type            enum_doc_types
+  created_at      DateTime       @default(now())
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
 enum enum_card_types {
   CREDIT
   DEBIT
   BOTH
+}
+
+enum enum_doc_types {
+  RG
+  CNH
 }
