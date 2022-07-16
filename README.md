@@ -738,7 +738,7 @@ In this section, you will find the API's endpoints and their respective descript
 
 ## Credit cards
 
-### &nbsp; ‣ &nbsp; Create a credit_card
+### &nbsp; ‣ &nbsp; Create a credit card
 
 ###### &nbsp; &nbsp; POST _`/credit-cards/create`_
 
@@ -780,7 +780,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search all credit_cards
+### &nbsp; ‣ &nbsp; Search all credit cards
 
 ###### &nbsp; &nbsp; GET _`/credit-cards/all`_
 
