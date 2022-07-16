@@ -25,10 +25,18 @@ function useMiddleware(middlewares: UseMiddleware, endpoint: string) {
     }
 
     if (middlewares.token) {
-      processHeader(req.header('Authorization'));
-      res.locals.subject = await requireToken(
-        req.header('Authorization') ?? '',
-      );
+      const token = req.header('Authorization');
+      if (!token) {
+        throw new AppError(
+          'Missing token',
+          401,
+          'Missing token',
+          'Ensure to provide the required token',
+        );
+      }
+
+      processHeader(token);
+      res.locals.subject = await requireToken(token ?? '');
     }
 
     return next();
