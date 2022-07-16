@@ -80,7 +80,7 @@ You can now access the API's endpoints by navigating to `http://localhost:5000/`
 
 # API Reference
 
-In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples. All data is sent and received as JSON.
+In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples, as well as the Prisma models for each entity, that can be used as guide for data formatting. All data is sent and received as JSON.
 
 <!-- Models -->
 
