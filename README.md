@@ -437,7 +437,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search a note
+### &nbsp; ‣ &nbsp; Search a network
 
 ###### &nbsp; &nbsp; GET _`/networks/:id`_
 
@@ -464,7 +464,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Delete a note
+### &nbsp; ‣ &nbsp; Delete a network
 
 ###### &nbsp; &nbsp; DELETE _`/networks/:id/delete`_
 
@@ -558,7 +558,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search a note
+### &nbsp; ‣ &nbsp; Search a document
 
 ###### &nbsp; &nbsp; GET _`/documents/:id`_
 
@@ -585,7 +585,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Delete a note
+### &nbsp; ‣ &nbsp; Delete a document
 
 ###### &nbsp; &nbsp; DELETE _`/documents/:id/delete`_
 
@@ -678,7 +678,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search a note
+### &nbsp; ‣ &nbsp; Search a credential
 
 ###### &nbsp; &nbsp; GET _`/credentials/:id`_
 
@@ -705,7 +705,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Delete a note
+### &nbsp; ‣ &nbsp; Delete a credential
 
 ###### &nbsp; &nbsp; DELETE _`/credentials/:id/delete`_
 
@@ -802,7 +802,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search a note
+### &nbsp; ‣ &nbsp; Search a credit card
 
 ###### &nbsp; &nbsp; GET _`/credit-cards/:id`_
 
@@ -829,7 +829,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Delete a note
+### &nbsp; ‣ &nbsp; Delete a credit card
 
 ###### &nbsp; &nbsp; DELETE _`/credit-cards/:id/delete`_
 
