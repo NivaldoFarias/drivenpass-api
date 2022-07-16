@@ -30,10 +30,14 @@
 
 - [Getting Started](#getting-started)
 - [API Reference](#api-reference)
+  - [Models](#models)
   - [Routes](#routes)
-  - [Cards](#cards)
-  - [Payments](#payments)
-  - [Recharges](#recharges)
+  - [Authentication](#authentication)
+  - [Notes](#notes)
+  - [Networks](#networks)
+  - [Documents](#documents)
+  - [Credentials](#credential)
+  - [Credit cards](#credit-cards)
 - [Contact & Study Playlist](#contact--study-playlist)
 
 <!-- Getting Started -->
@@ -70,6 +74,72 @@ You can now access the API's endpoints by navigating to `http://localhost:5000/`
 
 In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples. All data is sent and received as JSON.
 
+<!-- Models -->
+
+## Models
+
+### Users _`users`_
+
+- `id`: A unique identifier for each user. `serial4`
+- `username`: The user's username. `text`
+- `email`: The user's email. An email may only be registered once. `text`
+- `password`: The user's password. `text`
+- `created_at`: The date and time when the user was created. `timestamp`
+
+### Notes _`notes`_
+
+- `id`: A unique identifier for each note. `serial4`
+- `label`: A label for the note. Each user can only have one note with the same label. `text`
+- `content`: The content of the note. `text`
+- `user_id`: The user that created the note. `int4`
+- `created_at`: The date and time when the note was created. `timestamp`
+
+### Networks _`networks`_
+
+- `id`: A unique identifier for each network. `serial4`
+- `label`: A label for the network. Each user can only have one network with the same label. `text`
+- `name`: The name of the network. `text`
+- `password`: The network password. The inserted data is encrypted, and decrypted upon query. `text`
+- `user_id`: The user that created the network. `int4`
+- `created_at`: The date and time when the network was created. `timestamp`
+
+### Documents _`documents`_
+
+- `id`: A unique identifier for each document. `serial4`
+- `label`: A label for the document. Each user can only have one document with the same label. `text`
+- `full_name`: The full name found on the document. `text`
+- `emission_date`: The emission date of the document. The date must follow the format **_DD/MM/YYYY_**.`varhchar(10)`
+- `exp_date`: The expiration date of the document. The date must follow the format **_DD/MM/YYYY_**.`varhchar(10)`
+- `registry_number` : The registry number of the document. `text`
+- `issuing_agency`: The issuing agency of the document. `text`
+- `type`: The document'd type. Must either be '**CNH**' or '**RG**'. `enum`
+- `user_id`: The user that created the document. `int4`
+- `created_at`: The date and time when the document was created. `timestamp`
+
+### Credentials _`credentials`_
+
+- `id`: A unique identifier for each credential. `serial4`
+- `label`: A label for the credential. Each user can only have one credential with the same label. `text`
+- `username`: The username of the credential. `text`
+- `password`: The password of the credential. The inserted data is encrypted, and decrypted upon query. ` text``text `
+- `url`: The URL of the credential. `text`
+- `user_id`: The user that created the credential. `int4`
+- `created_at`: The date and time when the credential was created. `timestamp`
+
+### Credit cards _`credit_cards`_
+
+- `id`: A unique identifier for each credit card. `serial4`
+- `label`: A label for the credit card. Each user can only have one credit card with the same label. `text`
+- `number`: The credit card number. `varhchar(16)`
+- `exp_date`: The credit card expiration date. The date must follow the format **MM/YY**.`varhchar(5)`
+- `cvc`: The credit card CVC. The inserted data is encrypted, and decrypted upon query. `text`
+- `password`: The credit card password. The inserted data is encrypted, and decrypted upon query. `text`
+- `owner`: The credit card owner. `text`
+- `is_virtual`: Whether the credit card is virtual or not. `bool`
+- `type`: The credit card type. Must either be '**CREDIT**', '**DEBIT**' or '**BOTH**'. `enum`
+- `user_id`: The user that created the credit card. `int4`
+- `created_at`: The date and time when the credit card was created. `timestamp`
+
 <!-- Routes -->
 
 ## Routes
@@ -81,38 +151,38 @@ In this section, you will find the API's endpoints and their respective descript
 
 ### [Notes](#notes) _`/notes`_
 
-- [Create a new note](#---create-a-new-note)
+- [Create a note](#---create-a-note)
 - [Search all notes](#---search-all-notes)
 - [Search a note](#---search-a-note)
 - [Delete a note](#---delete-a-note)
 
 ### [Networks](#networks) _`/networks`_
 
-- [Create a new network](#---create-a-new-network)
+- [Create a network](#---create-a-network)
 - [Search all networks](#---search-all-networks)
 - [Search a network](#---search-a-network)
 - [Delete a network](#---delete-a-network)
 
 ### [Documents](#documents) _`/documents`_
 
-- [Create a new document](#---create-a-new-document)
+- [Create a document](#---create-a-document)
 - [Search all documents](#---search-all-documents)
 - [Search a document](#---search-a-document)
 - [Delete a document](#---delete-a-document)
 
 ### [Credentials](#credentials) _`/credentials`_
 
-- [Create a new credential](#---create-a-new-credential)
+- [Create a credential](#---create-a-credential)
 - [Search all credentials](#---search-all-credentials)
 - [Search a credential](#---search-a-credential)
 - [Delete a credential](#---delete-a-credential)
 
 ### [Credit cards](#credit-cards) _`/credit-cards`_
 
-- [Create a new credit-card](#---create-a-new-credit-card)
+- [Create a credit-card](#---create-a-credit-card)
 - [Search all credit cards](#---search-all-credit-cards)
-- [Search a credit-card](#---search-a-credit-card)
-- [Delete a credit-card](#---delete-a-credit-card)
+- [Search a credit card](#---search-a-credit-card)
+- [Delete a credit card](#---delete-a-credit-card)
 
 ## Notes
 
@@ -127,7 +197,8 @@ In this section, you will find the API's endpoints and their respective descript
 ```json
 {
   "label": "First note",
-  "content": "This is a test! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  "content": "This is a test! Lorem ipsum dolor sit amet,
+consectetur adipiscing elit, sed do eiusmod tempor incididunt."
 }
 ```
 
@@ -145,16 +216,67 @@ In this section, you will find the API's endpoints and their respective descript
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
 |   **201**   |        Created        |          `data: {}`           |
-|   **400**   |    Missing Headers    | `error: { message, details }` |
-|   **401**   |    Unauthenticated    | `error: { message, details }` |
+|   **400**   |    Missing headers    | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
 |   **403**   |       Forbidden       | `error: { message, details }` |
-|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search a card
+### &nbsp; ‣ &nbsp; Search all notes
 
-###### &nbsp; &nbsp; GET _`/cards/all`_
+###### &nbsp; &nbsp; GET _`/notes/all`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |      `data: { notes[] }`      |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |     Invalid token     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search a note
+
+###### &nbsp; &nbsp; GET _`/notes/:id`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |       `data: { notes }`       |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Delete a note
+
+###### &nbsp; &nbsp; DELETE _`/notes/:id/delete`_
 
 ### &nbsp; ☰ &nbsp; Request
 
@@ -172,14 +294,18 @@ In this section, you will find the API's endpoints and their respective descript
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
 |   **200**   |          OK           |          `data: {}`           |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
 |   **403**   |       Forbidden       | `error: { message, details }` |
 |   **404**   |       Not Found       | `error: { message, details }` |
-|   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Block a card
+## Networks
 
-###### &nbsp; &nbsp; POST _`/cards/block`_
+### &nbsp; ‣ &nbsp; Create a network
+
+###### &nbsp; &nbsp; POST _`/networks/create`_
 
 ### &nbsp; ☰ &nbsp; Request
 
@@ -187,115 +313,9 @@ In this section, you will find the API's endpoints and their respective descript
 
 ```json
 {
-  "cardId": "3",
-  "password": "1234"
-}
-```
-
-###### Headers
-
-```json
-{
-  "Content-Type": "application/json"
-}
-```
-
-### &nbsp; ☰ &nbsp; Responses
-
-| Status Code |      Description      |          Properties           |
-| :---------: | :-------------------: | :---------------------------: |
-|   **200**   |          OK           |          `data: {}`           |
-|   **403**   |       Forbidden       | `error: { message, details }` |
-|   **404**   |       Not Found       | `error: { message, details }` |
-|   **422**   |     Invalid Input     | `error: { message, details }` |
-|   **500**   | Internal Server Error | `error: { message, details }` |
-
-### &nbsp; ‣ &nbsp; Unblock a card
-
-###### &nbsp; &nbsp; POST _`/cards/unblock`_
-
-### &nbsp; ☰ &nbsp; Request
-
-###### Body
-
-```json
-{
-  "cardId": "3",
-  "password": "1234"
-}
-```
-
-###### Headers
-
-```json
-{
-  "Content-Type": "application/json"
-}
-```
-
-### &nbsp; ☰ &nbsp; Responses
-
-| Status Code |      Description      |          Properties           |
-| :---------: | :-------------------: | :---------------------------: |
-|   **200**   |          OK           |          `data: {}`           |
-|   **403**   |       Forbidden       | `error: { message, details }` |
-|   **404**   |       Not Found       | `error: { message, details }` |
-|   **422**   |     Invalid Input     | `error: { message, details }` |
-|   **500**   | Internal Server Error | `error: { message, details }` |
-
-## Payments
-
-### &nbsp; ‣ &nbsp; New payment
-
-###### &nbsp; &nbsp; POST _`/payments/new`_
-
-### &nbsp; ☰ &nbsp; Request
-
-###### Body
-
-```json
-{
-  "card": {
-    "id": 3,
-    "password": "1234"
-  },
-  "businessId": 5,
-  "amount": 1000
-}
-```
-
-###### Headers
-
-```json
-{
-  "Content-Type": "application/json"
-}
-```
-
-### &nbsp; ☰ &nbsp; Responses
-
-| Status Code |      Description      |          Properties           |
-| :---------: | :-------------------: | :---------------------------: |
-|   **201**   |        Created        |          `data: {}`           |
-|   **403**   |       Forbidden       | `error: { message, details }` |
-|   **404**   |       Not Found       | `error: { message, details }` |
-|   **422**   |     Invalid Input     | `error: { message, details }` |
-|   **500**   | Internal Server Error | `error: { message, details }` |
-
-## Recharges
-
-### &nbsp; ‣ &nbsp; New recharge
-
-###### &nbsp; &nbsp; POST _`/recharges/new`_
-
-### &nbsp; ☰ &nbsp; Request
-
-###### Body
-
-```json
-{
-  "cardId": 3,
-  "amount": 1000
+  "label": "House network",
+  "name": "Main",
+  "password": "123456"
 }
 ```
 
@@ -304,7 +324,7 @@ In this section, you will find the API's endpoints and their respective descript
 ```json
 {
   "Content-Type": "application/json",
-  "x-api-key": "this-is-a-needlessly-long-placeholder-api-key"
+  "Authorization": "Bearer <token>"
 }
 ```
 
@@ -313,11 +333,454 @@ In this section, you will find the API's endpoints and their respective descript
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
 |   **201**   |        Created        |          `data: {}`           |
-|   **400**   |    Missing Headers    | `error: { message, details }` |
-|   **401**   |    Unauthenticated    | `error: { message, details }` |
+|   **400**   |    Missing headers    | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search all networks
+
+###### &nbsp; &nbsp; GET _`/networks/all`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |    `data: { networks[] }`     |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |     Invalid token     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search a note
+
+###### &nbsp; &nbsp; GET _`/networks/:id`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |     `data: { networks }`      |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
 |   **403**   |       Forbidden       | `error: { message, details }` |
 |   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Delete a note
+
+###### &nbsp; &nbsp; DELETE _`/networks/:id/delete`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |          `data: {}`           |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+## Documents
+
+### &nbsp; ‣ &nbsp; Create a document
+
+###### &nbsp; &nbsp; POST _`/documents/create`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Body
+
+```json
+{
+  "label": "First Document",
+  "full_name": "John Doe",
+  "emission_date": "03/06/2020",
+  "exp_date": "12/05/2025",
+  "registry_number": "132456",
+  "issuing_agency": "sass",
+  "type": "RG"
+}
+```
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **201**   |        Created        |          `data: {}`           |
+|   **400**   |    Missing headers    | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
 |   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search all documents
+
+###### &nbsp; &nbsp; GET _`/documents/all`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |    `data: { documents[] }`    |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |     Invalid token     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search a note
+
+###### &nbsp; &nbsp; GET _`/documents/:id`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |     `data: { documents }`     |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Delete a note
+
+###### &nbsp; &nbsp; DELETE _`/documents/:id/delete`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |          `data: {}`           |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+<!-- Contact & Study Playlist -->
+
+## Credentials
+
+### &nbsp; ‣ &nbsp; Create a credential
+
+###### &nbsp; &nbsp; POST _`/credentials/create`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Body
+
+```json
+{
+  "label": "First credential",
+  "username": "JohnDoe",
+  "url": "https://facebook.com",
+  "password": "123456789"
+}
+```
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **201**   |        Created        |          `data: {}`           |
+|   **400**   |    Missing headers    | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search all credentials
+
+###### &nbsp; &nbsp; GET _`/credentials/all`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |   `data: { credentials[] }`   |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |     Invalid token     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search a note
+
+###### &nbsp; &nbsp; GET _`/credentials/:id`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |    `data: { credentials }`    |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Delete a note
+
+###### &nbsp; &nbsp; DELETE _`/credentials/:id/delete`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |          `data: {}`           |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+<!-- Contact & Study Playlist -->
+
+## Credit cards
+
+### &nbsp; ‣ &nbsp; Create a credit_card
+
+###### &nbsp; &nbsp; POST _`/credit-cards/create`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Body
+
+```json
+{
+  "label": "First credit card",
+  "number": "1234123412341324",
+  "exp_date": "08/25",
+  "password": "1234",
+  "cvc": "123",
+  "owner": "JOHN DOE",
+  "is_virtual": false,
+  "type": "BOTH"
+}
+```
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **201**   |        Created        |          `data: {}`           |
+|   **400**   |    Missing headers    | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search all credit_cards
+
+###### &nbsp; &nbsp; GET _`/credit-cards/all`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |  `data: { credit_cards[] }`   |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |     Invalid token     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Search a note
+
+###### &nbsp; &nbsp; GET _`/credit-cards/:id`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |   `data: { credit_cards }`    |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Delete a note
+
+###### &nbsp; &nbsp; DELETE _`/credit-cards/:id/delete`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <token>"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |          `data: {}`           |
+|   **400**   |  Invalid parameters   | `error: { message, details }` |
+|   **401**   |     Missing token     | `error: { message, details }` |
+|   **403**   |       Forbidden       | `error: { message, details }` |
+|   **404**   |       Not Found       | `error: { message, details }` |
+|   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
 <!-- Contact & Study Playlist -->
