@@ -34,7 +34,6 @@ async function signInValidations(
   const result = await repository.findByEmail(email);
 
   validateUser(result);
-  emailsIsRegistered(email);
   validPassword(password, result?.password);
 
   res.locals.user = result;
@@ -65,18 +64,6 @@ function emailIsUnique(result: users | null) {
     );
   }
   return AppLog('Middleware', 'Email is unique');
-}
-
-function emailsIsRegistered(email: string) {
-  if (!email) {
-    throw new AppError(
-      'Email is not registered',
-      404,
-      'Email is not registered',
-      'Ensure to provide an email address that is registered',
-    );
-  }
-  return AppLog('Middleware', 'Email is registered');
 }
 
 function validPassword(providedPassword: string, password: string = '') {

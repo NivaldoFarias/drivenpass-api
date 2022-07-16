@@ -184,6 +184,74 @@ In this section, you will find the API's endpoints and their respective descript
 - [Search a credit card](#---search-a-credit-card)
 - [Delete a credit card](#---delete-a-credit-card)
 
+## Authentication
+
+### &nbsp; ‣ &nbsp; Register
+
+###### &nbsp; &nbsp; POST _`/auth/register`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Body
+
+```json
+{
+  "username": "johndoe",
+  "email": "john_doe@gmail.com",
+  "password": "123456789"
+}
+```
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |       Description        |          Properties           |
+| :---------: | :----------------------: | :---------------------------: |
+|   **201**   |         Created          |          `data: {}`           |
+|   **409**   | Email already registered | `error: { message, details }` |
+|   **422**   |      Invalid Input       | `error: { message, details }` |
+|   **500**   |  Internal Server Error   | `error: { message, details }` |
+
+### &nbsp; ‣ &nbsp; Sign in
+
+###### &nbsp; &nbsp; POST _`/auth/sign-in`_
+
+### &nbsp; ☰ &nbsp; Request
+
+###### Body
+
+```json
+{
+  "email": "john_doe@gmail.com",
+  "password": "123456789"
+}
+```
+
+###### Headers
+
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+### &nbsp; ☰ &nbsp; Responses
+
+| Status Code |      Description      |          Properties           |
+| :---------: | :-------------------: | :---------------------------: |
+|   **200**   |          OK           |       `data: { token }`       |
+|   **403**   |   Invalid password    | `error: { message, details }` |
+|   **404**   |    User not found     | `error: { message, details }` |
+|   **422**   |     Invalid Input     | `error: { message, details }` |
+|   **500**   | Internal Server Error | `error: { message, details }` |
+
 ## Notes
 
 ### &nbsp; ‣ &nbsp; Create a note
