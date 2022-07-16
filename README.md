@@ -265,8 +265,7 @@ In this section, you will find the API's endpoints and their respective descript
 ```json
 {
   "label": "First note",
-  "content": "This is a test! Lorem ipsum dolor sit amet,
-consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+  "content": "This is a test! Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt."
 }
 ```
 
