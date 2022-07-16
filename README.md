@@ -31,6 +31,12 @@
 - [Getting Started](#getting-started)
 - [API Reference](#api-reference)
   - [Models](#models)
+    - [User model](#user-model-users)
+    - [Note model](#note-model-notes)
+    - [Network model](#network-model-networks)
+    - [Document model](#document-model-documents)
+    - [Credential model](#credential-model-credentials)
+    - [Credit card model](#credit-card-model-credit_cards)
   - [Routes](#routes)
   - [Authentication](#authentication)
   - [Notes](#notes)
@@ -78,7 +84,7 @@ In this section, you will find the API's endpoints and their respective descript
 
 ## Models
 
-### Users _`users`_
+### User model _`users`_
 
 - `id`: A unique identifier for each user. `serial4`
 - `username`: The user's username. `text`
@@ -86,7 +92,7 @@ In this section, you will find the API's endpoints and their respective descript
 - `password`: The user's password. `text`
 - `created_at`: The date and time when the user was created. `timestamp`
 
-### Notes _`notes`_
+### Note model _`notes`_
 
 - `id`: A unique identifier for each note. `serial4`
 - `label`: A label for the note. Each user can only have one note with the same label. `text`
@@ -94,7 +100,7 @@ In this section, you will find the API's endpoints and their respective descript
 - `user_id`: The user that created the note. `int4`
 - `created_at`: The date and time when the note was created. `timestamp`
 
-### Networks _`networks`_
+### Network model _`networks`_
 
 - `id`: A unique identifier for each network. `serial4`
 - `label`: A label for the network. Each user can only have one network with the same label. `text`
@@ -103,7 +109,7 @@ In this section, you will find the API's endpoints and their respective descript
 - `user_id`: The user that created the network. `int4`
 - `created_at`: The date and time when the network was created. `timestamp`
 
-### Documents _`documents`_
+### Document model _`documents`_
 
 - `id`: A unique identifier for each document. `serial4`
 - `label`: A label for the document. Each user can only have one document with the same label. `text`
@@ -116,7 +122,7 @@ In this section, you will find the API's endpoints and their respective descript
 - `user_id`: The user that created the document. `int4`
 - `created_at`: The date and time when the document was created. `timestamp`
 
-### Credentials _`credentials`_
+### Credential model _`credentials`_
 
 - `id`: A unique identifier for each credential. `serial4`
 - `label`: A label for the credential. Each user can only have one credential with the same label. `text`
@@ -126,7 +132,7 @@ In this section, you will find the API's endpoints and their respective descript
 - `user_id`: The user that created the credential. `int4`
 - `created_at`: The date and time when the credential was created. `timestamp`
 
-### Credit cards _`credit_cards`_
+### Credit card model _`credit_cards`_
 
 - `id`: A unique identifier for each credit card. `serial4`
 - `label`: A label for the credit card. Each user can only have one credit card with the same label. `text`
