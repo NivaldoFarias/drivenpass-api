@@ -16,7 +16,6 @@ networksRoutes.post(
     { schema: schema.create, token: true },
     endpoint + createEndpoint,
   ),
-  middleware.createValidations,
   controller.create,
 );
 

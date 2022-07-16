@@ -5,22 +5,6 @@ import * as repository from '../repositories/network.repository';
 import * as service from '../services/network.service';
 import * as validate from './global.middleware';
 
-import AppError from '../config/error';
-import AppLog from '../events/AppLog';
-
-async function createValidations(
-  _req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  const { label }: networks = res.locals.body;
-  const subject = Number(res.locals.subject);
-
-  await validateLabel(label, subject);
-
-  return next();
-}
-
 async function getByIdValidations(
   req: Request,
   res: Response,
@@ -59,23 +43,4 @@ async function deleteValidations(
   return next();
 }
 
-// Local Utils
-async function validateLabel(label: string, owner_id: number) {
-  const usersAlreadyUsedLabel = await repository.findUserByLabel(
-    label,
-    owner_id,
-  );
-
-  if (usersAlreadyUsedLabel) {
-    throw new AppError(
-      'Label already in use',
-      409,
-      'Label already in use',
-      'A Label can only be used once per user',
-    );
-  }
-
-  return AppLog('Middleware', 'Valid Label');
-}
-
-export { createValidations, getByIdValidations, deleteValidations };
+export { getByIdValidations, deleteValidations };

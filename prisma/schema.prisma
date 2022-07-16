@@ -31,6 +31,31 @@ model notes {
   user users @relation(fields: [user_id], references: [id])
 }
 
+model networks {
+  id         Int      @id @default(autoincrement())
+  label      String
+  password   String
+  user_id    Int
+  created_at DateTime @default(now())
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
+model documents {
+  id              Int            @id @default(autoincrement())
+  label           String
+  full_name       String
+  emission_date   String         @db.VarChar(10)
+  exp_date        String         @db.VarChar(10)
+  registry_number String
+  issuing_agency  String
+  user_id         Int
+  type            enum_doc_types
+  created_at      DateTime       @default(now())
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
 model credentials {
   id         Int      @id @default(autoincrement())
   url        String
@@ -55,32 +80,6 @@ model credit_cards {
   user_id    Int
   created_at DateTime        @default(now())
   type       enum_card_types
-
-  user users @relation(fields: [user_id], references: [id])
-}
-
-model networks {
-  id         Int      @id @default(autoincrement())
-  label      String
-  name       String
-  password   String
-  user_id    Int
-  created_at DateTime @default(now())
-
-  user users @relation(fields: [user_id], references: [id])
-}
-
-model documents {
-  id              Int            @id @default(autoincrement())
-  label           String
-  full_name       String
-  emission_date   String         @db.VarChar(10)
-  exp_date        String         @db.VarChar(10)
-  registry_number String
-  issuing_agency  String
-  user_id         Int
-  type            enum_doc_types
-  created_at      DateTime       @default(now())
 
   user users @relation(fields: [user_id], references: [id])
 }

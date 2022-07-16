@@ -97,16 +97,15 @@ In this section, you will find the API's endpoints and their respective descript
 ### Note model _`notes`_
 
 - `id`: A unique identifier for each note. `serial4`
-- `label`: A label for the note. Each user can only have one note with the same label. `text`
-- `content`: The content of the note. `text`
+- `label`: A label for the note. Each user can only have one note with the same label. Up to 50 characters long. `text`
+- `content`: The content of the note. Up to 1000 characters long. `text`
 - `user_id`: The user that created the note. `int4`
 - `created_at`: The date and time when the note was created. `timestamp`
 
 ### Network model _`networks`_
 
 - `id`: A unique identifier for each network. `serial4`
-- `label`: A label for the network. Each user can only have one network with the same label. `text`
-- `name`: The name of the network. `text`
+- `label`: A label for the network. Up to 50 characters long. `text`
 - `password`: The network password. The inserted data is encrypted, and decrypted upon query. `text`
 - `user_id`: The user that created the network. `int4`
 - `created_at`: The date and time when the network was created. `timestamp`
@@ -114,7 +113,7 @@ In this section, you will find the API's endpoints and their respective descript
 ### Document model _`documents`_
 
 - `id`: A unique identifier for each document. `serial4`
-- `label`: A label for the document. Each user can only have one document with the same label. `text`
+- `label`: A label for the document. Each user can only have one document with the same label. Up to 50 characters long. `text`
 - `full_name`: The full name found on the document. `text`
 - `emission_date`: The emission date of the document. The date must follow the format **_DD/MM/YYYY_**.`varhchar(10)`
 - `exp_date`: The expiration date of the document. The date must follow the format **_DD/MM/YYYY_**.`varhchar(10)`
@@ -127,7 +126,7 @@ In this section, you will find the API's endpoints and their respective descript
 ### Credential model _`credentials`_
 
 - `id`: A unique identifier for each credential. `serial4`
-- `label`: A label for the credential. Each user can only have one credential with the same label. `text`
+- `label`: A label for the credential. Each user can only have one credential with the same label. Up to 50 characters long. `text`
 - `username`: The username of the credential. `text`
 - `password`: The password of the credential. The inserted data is encrypted, and decrypted upon query. ` text``text `
 - `url`: The URL of the credential. `text`
@@ -137,7 +136,7 @@ In this section, you will find the API's endpoints and their respective descript
 ### Credit card model _`credit_cards`_
 
 - `id`: A unique identifier for each credit card. `serial4`
-- `label`: A label for the credit card. Each user can only have one credit card with the same label. `text`
+- `label`: A label for the credit card. Each user can only have one credit card with the same label. Up to 50 characters long. `text`
 - `number`: The credit card number. `varhchar(16)`
 - `exp_date`: The credit card expiration date. The date must follow the format **MM/YY**.`varhchar(5)`
 - `cvc`: The credit card CVC. The inserted data is encrypted, and decrypted upon query. `text`
@@ -389,7 +388,6 @@ In this section, you will find the API's endpoints and their respective descript
 ```json
 {
   "label": "House network",
-  "name": "Main",
   "password": "123456"
 }
 ```
