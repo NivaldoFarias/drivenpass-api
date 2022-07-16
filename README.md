@@ -80,7 +80,7 @@ You can now access the API's endpoints by navigating to `http://localhost:5000/`
 
 # API Reference
 
-In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples. All data is sent and received as JSON.
+In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples, as well as the [Prisma](https://www.prisma.io/) models for each entity, that can be used as guide for data formatting. All data is sent and received as JSON.
 
 <!-- Models -->
 
@@ -736,7 +736,7 @@ In this section, you will find the API's endpoints and their respective descript
 
 ## Credit cards
 
-### &nbsp; ‣ &nbsp; Create a credit_card
+### &nbsp; ‣ &nbsp; Create a credit card
 
 ###### &nbsp; &nbsp; POST _`/credit-cards/create`_
 
@@ -778,7 +778,7 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-### &nbsp; ‣ &nbsp; Search all credit_cards
+### &nbsp; ‣ &nbsp; Search all credit cards
 
 ###### &nbsp; &nbsp; GET _`/credit-cards/all`_
 
