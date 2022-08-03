@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "credit_cards" ALTER COLUMN "cvc" SET DATA TYPE TEXT,
-ALTER COLUMN "password" SET DATA TYPE TEXT;
