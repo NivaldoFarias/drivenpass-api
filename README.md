@@ -813,7 +813,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
