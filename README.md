@@ -1,33 +1,21 @@
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/NivaldoFarias/drivenpass-api">
-    <img src="./.github/drivenpass-logo.png" alt="DrivenPass Logo" width="110">
-  </a>
+## Summary
 
-<h3 align="center">DrivenPass API</h3>
-  <h6>WIP</h6>
-  <p>
-    Back end Development Project <strong>{19ᵗʰ}</strong>
-    <br />
-    <a href="https://github.com/NivaldoFarias/drivenpass-api/tree/main/src"><strong>Browse TypeScript code»</strong></a>
-</div>
+Back end Development Project **(19ᵗʰ)**
 
-<div align="center">
-  <h3>Built With</h3>
+- [**Browse TypeScript code»<**](https://github.com/NivaldoFarias/drivenpass-api/tree/main/src)
+- [**SCSS code»**](https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/index.scss)
+- [**Back end code»**](https://github.com/NivaldoFarias/git--store-backend#readme)
 
-  <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" height="30px"/>
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" height="30px"/>
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" height="30px"/>
-  <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" height="30px"/>
-  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" height="30px"/>  
-  <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express.js&logoColor=white" height="30px"/>
-  <img src="https://img.shields.io/badge/JWT-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink" height="30px"/>
-  
-</div>
+## Built with
+
+![heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
+![postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![node.js](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express.js&logoColor=white)
+![json-web-tokens](https://img.shields.io/badge/JWT-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)
 
 <!-- Table of Contents -->
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -49,7 +37,6 @@
 - [Contact & Study Playlist](#contact--study-playlist)
 
 <!-- Getting Started -->
-
 ## Getting Started
 
 This Api can be used in two different ways: by cloning the project or by using your preferred client, such as [Insomnia](https://insomnia.rest/) or [Postman](https://www.getpostman.com/).
@@ -77,13 +64,11 @@ You can now access the API's endpoints by navigating to `http://localhost:5000/`
 ###### ps.: Highly recommend using the request collections to test the API.
 
 <!-- API Reference -->
-
 ## API Reference
 
 In this section, you will find the API's endpoints and their respective descriptions, along with the request and response examples, as well as the [Prisma](https://www.prisma.io/) models for each entity, that can be used as guide for data formatting. All data is sent and received as JSON.
 
 <!-- Models -->
-
 ### Models
 
 #### User model _`users`_
@@ -148,7 +133,6 @@ In this section, you will find the API's endpoints and their respective descript
 - `created_at`: The date and time when the credit card was created. `timestamp`
 
 <!-- Routes -->
-
 ### Routes
 
 #### [Authentication](#authentication) _`/auth`_
@@ -853,7 +837,6 @@ In this section, you will find the API's endpoints and their respective descript
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
 <!-- Contact & Study Playlist -->
-
 ## Contact & Study Playlist
 
 In the following Youtube link I included all Youtube content I used or refered to while studying for this project. Hope you enjoy it!
