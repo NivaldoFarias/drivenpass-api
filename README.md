@@ -153,51 +153,51 @@ In this section, you will find the API's endpoints and their respective descript
 
 #### [Authentication](#authentication) _`/auth`_
 
-- [Register](#---register)
-- [Sign In](#---sign-in)
+- [Register](#register)
+- [Sign In](#sign-in)
 
 #### [Notes](#notes) _`/notes`_
 
-- [Create a note](#---create-a-note)
-- [Search all notes](#---search-all-notes)
-- [Search a note](#---search-a-note)
-- [Delete a note](#---delete-a-note)
+- [Create a note](#create-a-note)
+- [Search all notes](#search-all-notes)
+- [Search a note](#search-a-note)
+- [Delete a note](#delete-a-note)
 
 #### [Networks](#networks) _`/networks`_
 
-- [Create a network](#---create-a-network)
-- [Search all networks](#---search-all-networks)
-- [Search a network](#---search-a-network)
-- [Delete a network](#---delete-a-network)
+- [Create a network](#create-a-network)
+- [Search all networks](#search-all-networks)
+- [Search a network](#search-a-network)
+- [Delete a network](#delete-a-network)
 
 #### [Documents](#documents) _`/documents`_
 
-- [Create a document](#---create-a-document)
-- [Search all documents](#---search-all-documents)
-- [Search a document](#---search-a-document)
-- [Delete a document](#---delete-a-document)
+- [Create a document](#create-a-document)
+- [Search all documents](#search-all-documents)
+- [Search a document](#search-a-document)
+- [Delete a document](#delete-a-document)
 
 #### [Credentials](#credentials) _`/credentials`_
 
-- [Create a credential](#---create-a-credential)
-- [Search all credentials](#---search-all-credentials)
-- [Search a credential](#---search-a-credential)
-- [Delete a credential](#---delete-a-credential)
+- [Create a credential](#create-a-credential)
+- [Search all credentials](#search-all-credentials)
+- [Search a credential](#search-a-credential)
+- [Delete a credential](#delete-a-credential)
 
 #### [Credit cards](#credit-cards) _`/credit-cards`_
 
-- [Create a credit-card](#---create-a-credit-card)
-- [Search all credit cards](#---search-all-credit-cards)
-- [Search a credit card](#---search-a-credit-card)
-- [Delete a credit card](#---delete-a-credit-card)
+- [Create a credit-card](#create-a-credit-card)
+- [Search all credit cards](#search-all-credit-cards)
+- [Search a credit card](#search-a-credit-card)
+- [Delete a credit card](#delete-a-credit-card)
 
 ### Authentication
 
-#### &nbsp; ‣ &nbsp; Register
+#### Register
 
-###### &nbsp; &nbsp; POST _`/auth/register`_
+###### POST _`/auth/register`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -217,7 +217,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |       Description        |          Properties           |
 | :---------: | :----------------------: | :---------------------------: |
@@ -226,11 +226,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |      Invalid Input       | `error: { message, details }` |
 |   **500**   |  Internal Server Error   | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Sign in
+#### Sign in
 
-###### &nbsp; &nbsp; POST _`/auth/sign-in`_
+###### POST _`/auth/sign-in`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -249,7 +249,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -261,11 +261,11 @@ In this section, you will find the API's endpoints and their respective descript
 
 ### Notes
 
-#### &nbsp; ‣ &nbsp; Create a note
+#### Create a note
 
-###### &nbsp; &nbsp; POST _`/notes/create`_
+###### POST _`/notes/create`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -285,7 +285,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -297,11 +297,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search all notes
+#### Search all notes
 
-###### &nbsp; &nbsp; GET _`/notes/all`_
+###### GET _`/notes/all`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -312,7 +312,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -321,11 +321,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search a note
+#### Search a note
 
-###### &nbsp; &nbsp; GET _`/notes/:id`_
+###### GET _`/notes/:id`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -336,7 +336,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -348,11 +348,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Delete a note
+#### Delete a note
 
-###### &nbsp; &nbsp; DELETE _`/notes/:id/delete`_
+###### DELETE _`/notes/:id/delete`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -363,7 +363,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -377,11 +377,11 @@ In this section, you will find the API's endpoints and their respective descript
 
 ### Networks
 
-#### &nbsp; ‣ &nbsp; Create a network
+#### Create a network
 
-###### &nbsp; &nbsp; POST _`/networks/create`_
+###### POST _`/networks/create`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -401,7 +401,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -413,11 +413,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search all networks
+#### Search all networks
 
-###### &nbsp; &nbsp; GET _`/networks/all`_
+###### GET _`/networks/all`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -428,7 +428,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -437,11 +437,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search a network
+#### Search a network
 
-###### &nbsp; &nbsp; GET _`/networks/:id`_
+###### GET _`/networks/:id`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -452,7 +452,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -464,11 +464,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Delete a network
+#### Delete a network
 
-###### &nbsp; &nbsp; DELETE _`/networks/:id/delete`_
+###### DELETE _`/networks/:id/delete`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -479,7 +479,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -493,11 +493,11 @@ In this section, you will find the API's endpoints and their respective descript
 
 ### Documents
 
-#### &nbsp; ‣ &nbsp; Create a document
+#### Create a document
 
-###### &nbsp; &nbsp; POST _`/documents/create`_
+###### POST _`/documents/create`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -522,7 +522,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -534,11 +534,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search all documents
+#### Search all documents
 
-###### &nbsp; &nbsp; GET _`/documents/all`_
+###### GET _`/documents/all`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -549,7 +549,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -558,11 +558,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search a document
+#### Search a document
 
-###### &nbsp; &nbsp; GET _`/documents/:id`_
+###### GET _`/documents/:id`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -573,7 +573,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -585,11 +585,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Delete a document
+#### Delete a document
 
-###### &nbsp; &nbsp; DELETE _`/documents/:id/delete`_
+###### DELETE _`/documents/:id/delete`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -600,7 +600,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -614,11 +614,11 @@ In this section, you will find the API's endpoints and their respective descript
 
 ### Credentials
 
-#### &nbsp; ‣ &nbsp; Create a credential
+#### Create a credential
 
-###### &nbsp; &nbsp; POST _`/credentials/create`_
+###### POST _`/credentials/create`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -640,7 +640,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -652,11 +652,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search all credentials
+#### Search all credentials
 
-###### &nbsp; &nbsp; GET _`/credentials/all`_
+###### GET _`/credentials/all`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -667,7 +667,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -676,11 +676,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search a credential
+#### Search a credential
 
-###### &nbsp; &nbsp; GET _`/credentials/:id`_
+###### GET _`/credentials/:id`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -691,7 +691,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -703,11 +703,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Delete a credential
+#### Delete a credential
 
-###### &nbsp; &nbsp; DELETE _`/credentials/:id/delete`_
+###### DELETE _`/credentials/:id/delete`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -718,7 +718,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -730,15 +730,13 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-<!-- Contact & Study Playlist -->
-
 ### Credit cards
 
-#### &nbsp; ‣ &nbsp; Create a credit card
+#### Create a credit card
 
-###### &nbsp; &nbsp; POST _`/credit-cards/create`_
+###### POST _`/credit-cards/create`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Body
 
@@ -764,7 +762,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -776,11 +774,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **422**   |     Invalid Input     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search all credit cards
+#### Search all credit cards
 
-###### &nbsp; &nbsp; GET _`/credit-cards/all`_
+###### GET _`/credit-cards/all`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -791,7 +789,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
@@ -800,11 +798,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **403**   |     Invalid token     | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Search a credit card
+#### Search a credit card
 
-###### &nbsp; &nbsp; GET _`/credit-cards/:id`_
+###### GET _`/credit-cards/:id`_
 
-##### &nbsp; ☰ &nbsp; Request
+#####  Request
 
 ###### Headers
 
@@ -827,11 +825,11 @@ In this section, you will find the API's endpoints and their respective descript
 |   **409**   |       Conflict        | `error: { message, details }` |
 |   **500**   | Internal Server Error | `error: { message, details }` |
 
-#### &nbsp; ‣ &nbsp; Delete a credit card
+#### Delete a credit card
 
-###### &nbsp; &nbsp; DELETE _`/credit-cards/:id/delete`_
+###### DELETE _`/credit-cards/:id/delete`_
 
-##### &nbsp; ☰ &nbsp; Request
+##### Request
 
 ###### Headers
 
@@ -842,7 +840,7 @@ In this section, you will find the API's endpoints and their respective descript
 }
 ```
 
-##### &nbsp; ☰ &nbsp; Responses
+##### Responses
 
 | Status Code |      Description      |          Properties           |
 | :---------: | :-------------------: | :---------------------------: |
