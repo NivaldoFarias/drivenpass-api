@@ -2,7 +2,7 @@
 
 Back end Development Project **(19ᵗʰ)**
 
-- [**Browse TypeScript code»<**](https://github.com/NivaldoFarias/drivenpass-api/tree/main/src)
+- [**Browse TypeScript code»**](https://github.com/NivaldoFarias/drivenpass-api/tree/main/src)
 - [**SCSS code»**](https://github.com/NivaldoFarias/git--store-frontend/blob/main/src/index.scss)
 - [**Back end code»**](https://github.com/NivaldoFarias/git--store-backend#readme)
 
